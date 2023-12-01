@@ -16,6 +16,7 @@ poetry install
 ```
 
 Start poetry shell to get into the virtual environment
+```
 poetry shell
 ```
 
