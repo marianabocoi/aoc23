@@ -18,7 +18,7 @@ def test_4():
     assert d01p1.calibration_value("treb7uchet") == 77
 
 
-def test_5():
-    test_input_file = os.path.dirname(__file__) + "/test_input.txt"
+def test_0():
+    test_input_file = os.path.dirname(__file__) + "/test_input_p1.txt"
     print(test_input_file)
     assert d01p1.part1(test_input_file) == 142

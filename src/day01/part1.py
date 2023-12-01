@@ -19,7 +19,10 @@ def part1(file_path):
     clibration_sum = 0
     with open(file_path) as input_file:
         for line in input_file:
-            clibration_sum += calibration_value(line.strip())
+            value = calibration_value(line.strip())
+            if value > 99:
+                print(value)
+            clibration_sum += value
     return clibration_sum
 
 
