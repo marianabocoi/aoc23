@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aoc23"
+version = "0.1.0"
+description = "Python solutions for https://adventofcode.com/2023"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.dev-dependencies]
+pytest = '^7.3.1'
+black = "^23.11.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# https://docs.pytest.org/en/7.4.x/reference/reference.html#ini-options-ref
+[tool.pytest.ini_options]
+pythonpath = "src"
