@@ -36,7 +36,7 @@ def calibration_value(s):
     return int("%s%s" % (getAsNumber(getFirst(s)), getAsNumber(getLast(s))))
 
 
-def part1(file_path):
+def part2(file_path):
     clibration_sum = 0
     with open(file_path) as input_file:
         for line in input_file:
@@ -47,4 +47,4 @@ def part1(file_path):
 if __name__ == "__main__":
     input_file = os.path.dirname(__file__) + "/input_day01.txt"
     print(input_file)
-    print(part1(input_file))
+    print(part2(input_file))

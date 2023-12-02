@@ -49,4 +49,4 @@ def test_7():
 def test_0():
     test_input_file = os.path.dirname(__file__) + "/test_input_p2.txt"
     print(test_input_file)
-    assert d01p2.part1(test_input_file) == 281
+    assert d01p2.part2(test_input_file) == 281
