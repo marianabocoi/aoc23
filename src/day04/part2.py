@@ -1,5 +1,4 @@
 import os
-import math
 
 
 def get_match_count(card):
@@ -21,7 +20,7 @@ def solve(file_path):
         j = matches
         while j > 0:
             card_count[i + j] += card_count[i]
-            j-=1
+            j -= 1
     return total_points
 
 

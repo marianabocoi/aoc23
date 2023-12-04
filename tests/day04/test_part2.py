@@ -1,6 +1,5 @@
 import os
 
-
 import day04.part2 as d04p2
 
 
