@@ -21,18 +21,25 @@ def test_1():
         9: {},
     }
     assert numbers == [
-        {467: {"y": 0, "x": [0, 1, 2]}},
-        {114: {"y": 0, "x": [5, 6, 7]}},
-        {35: {"y": 2, "x": [2, 3]}},
-        {633: {"y": 2, "x": [6, 7, 8]}},
-        {617: {"y": 4, "x": [0, 1, 2]}},
-        {58: {"y": 5, "x": [7, 8]}},
-        {592: {"y": 6, "x": [2, 3, 4]}},
-        {755: {"y": 7, "x": [6, 7, 8]}},
-        {664: {"y": 9, "x": [1, 2, 3]}},
-        {598: {"y": 9, "x": [5, 6, 7]}},
+        {"number": 467, "points": {"y": 0, "x": [0, 1, 2]}},
+        {"number": 114, "points": {"y": 0, "x": [5, 6, 7]}},
+        {"number": 35, "points": {"y": 2, "x": [2, 3]}},
+        {"number": 633, "points": {"y": 2, "x": [6, 7, 8]}},
+        {"number": 617, "points": {"y": 4, "x": [0, 1, 2]}},
+        {"number": 58, "points": {"y": 5, "x": [7, 8]}},
+        {"number": 592, "points": {"y": 6, "x": [2, 3, 4]}},
+        {"number": 755, "points": {"y": 7, "x": [6, 7, 8]}},
+        {"number": 664, "points": {"y": 9, "x": [1, 2, 3]}},
+        {"number": 598, "points": {"y": 9, "x": [5, 6, 7]}},
     ]
 
 
 def test_2():
-    assert d03p1.get_symbol_neighbours({"y": 5, "x": [7, 8]}, parts_schema) == ["*"]
+    assert d03p1.has_symbol_neighbours({"y": 0, "x": [0, 1, 2]}, parts_schema) is True
+    assert d03p1.has_symbol_neighbours({"y": 9, "x": [5, 6, 7]}, parts_schema) is True
+    assert d03p1.has_symbol_neighbours({"y": 0, "x": [5, 6, 7]}, parts_schema) is False
+    assert d03p1.has_symbol_neighbours({"y": 5, "x": [7, 8]}, parts_schema) is False
+
+
+def test_0():
+    assert d03p1.solve(test_input_file) == 4361

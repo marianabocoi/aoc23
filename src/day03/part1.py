@@ -1,3 +1,6 @@
+import os
+
+
 def get_schema(file_path):
     with open(file_path) as input_file:
         numbers = []
@@ -16,12 +19,16 @@ def get_schema(file_path):
                     if character != ".":
                         parts_schema[y][x] = character
                     if number != 0:
-                        numbers.append({number: {"y": y, "x": number_points}})
+                        numbers.append(
+                            {"number": number, "points": {"y": y, "x": number_points}}
+                        )
                     number = 0
                     number_points = []
                 x += 1
             if number != 0:
-                numbers.append({number: {"y": y, "x": number_points}})
+                numbers.append(
+                    {"number": number, "points": {"y": y, "x": number_points}}
+                )
             number = 0
             number_points = []
             x = 0
@@ -29,33 +36,35 @@ def get_schema(file_path):
     return parts_schema, numbers
 
 
-def get_symbol_neighbours(points, sch):
-    symbols = []
-    print('points["y"]', points)
-    print('(points["y"] - 1)', (points["y"] - 1))
-    if (points["y"] - 1) in sch.keys:
-        if points["x"][0] - 1 in sch[points["y"] - 1].keys:
-            symbols.append(sch[points["y"] - 1][points["x"][0] - 1])
-        if points["x"][:-1] + 1 in sch[points["y"] - 1].keys:
-            symbols.append(sch[points["y"] - 1][points["x"][:-1] + 1])
-        for k in points["x"]:
-            if k in sch[points["y"] - 1].keys:
-                symbols.append(sch[k][points["y"] - 1])
+def contains_symbol(range_y, range_x, sch):
+    for y in range_y:
+        if y in sch.keys():
+            for x in range_x:
+                if x in sch[y].keys():
+                    return True
+    return False
 
-    if points["y"] + 1 in sch.keys:
-        if points["x"][0] - 1 in sch[points["y"] + 1].keys:
-            symbols.append(sch[points["y"] + 1][points["x"][0] - 1])
-        if points["x"][:-1] + 1 in sch[points["y"] + 1].keys:
-            symbols.append(sch[points["y"] + 1][points["x"][:-1] + 1])
-        for k in points["x"]:
-            if k in sch[points["y"] + 1].keys:
-                symbols.append(sch[k][points["y"] + 1])
 
-        if points["x"][0] - 1 in sch[points["y"]].keys:
-            symbols.append(sch[points["y"]][points["x"][0] - 1])
-        if points["x"][:-1] + 1 in sch[points["y"]].keys:
-            symbols.append(sch[points["y"]][points["x"][:-1] + 1])
+def has_symbol_neighbours(points, sch):
+    mid_y = points["y"]
+    start_x = min(points["x"]) - 1
+    end_x = max(points["x"]) + 1
+    if contains_symbol([mid_y - 1, mid_y + 1], range(start_x, end_x + 1), sch):
+        return True
+    if contains_symbol([mid_y], [start_x, end_x], sch):
+        return True
+    return False
 
 
 def solve(file_path):
     parts_schema, numbers = get_schema(file_path)
+    sum = 0
+    for n in numbers:
+        if has_symbol_neighbours(n["points"], parts_schema):
+            sum += n["number"]
+    return sum
+
+
+if __name__ == "__main__":
+    input_file = os.path.dirname(__file__) + "/input_day03.txt"
+    print(solve(input_file))
