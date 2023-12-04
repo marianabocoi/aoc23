@@ -9,16 +9,11 @@ parts_schema, numbers = schema
 
 def test_1():
     assert parts_schema == {
-        0: {},
         1: {3: "*"},
-        2: {},
         3: {6: "#"},
         4: {3: "*"},
         5: {5: "+"},
-        6: {},
-        7: {},
         8: {3: "$", 5: "*"},
-        9: {},
     }
     assert numbers == [
         {"number": 467, "points": {"y": 0, "x": [0, 1, 2]}},

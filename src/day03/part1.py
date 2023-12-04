@@ -10,13 +10,14 @@ def get_schema(file_path):
         x = 0
         number = 0
         for line in input_file:
-            parts_schema[y] = {}
             for character in line.strip():
                 if character.isdigit():
                     number = number * 10 + int(character)
                     number_points.append(x)
                 else:
                     if character != ".":
+                        if y not in parts_schema.keys():
+                            parts_schema[y] = {}
                         parts_schema[y][x] = character
                     if number != 0:
                         numbers.append(

@@ -1,53 +1,66 @@
+import os
+
+
 def get_schema(file_path):
     with open(file_path) as input_file:
-        numbers = []
+        numbers = {}
         number_points = []
-        parts_schema = {}
+        gears = []
         y = 0
         x = 0
         number = 0
         for line in input_file:
-            parts_schema[y] = {}
             for character in line.strip():
                 if character.isdigit():
                     number = number * 10 + int(character)
                     number_points.append(x)
                 else:
-                    if character != ".":
-                        parts_schema[y][x] = character
+                    if character == "*":
+                        gears.append({"y": y, "x": x})
                     if number != 0:
-                        numbers.append({number: {"y": y, "x": number_points}})
+                        if y not in numbers.keys():
+                            numbers[y] = []
+                        numbers[y].append({"number": number, "x": number_points})
                     number = 0
                     number_points = []
                 x += 1
             if number != 0:
-                numbers.append({number: {"y": y, "x": number_points}})
+                if y not in numbers.keys():
+                    numbers[y] = []
+                numbers[y].append({"number": number, "x": number_points})
             number = 0
             number_points = []
             x = 0
             y += 1
-    return parts_schema, numbers
-
-def getSymbol(range_y, range_x, sch):
-    symbols_subset = []
-    for y in range_y:
-        if y in sch.keys:
-            for x in range_x:
-                if x in sch.keys:
-                    symbols_subset.append(sch[y][x])
-    return symbols_subset
-
-def get_symbol_neighbours(points, sch):
-    mid_y = points["y"]
-    start_x = min(points["x"])-1
-    end_x =max(points["x"])+1
-    symbols = getSymbol([mid_y-1, mid_y+1], range(start_x, end_x+1), sch)
-    symbols += getSymbol([mid_y],[start_x,end_x])
-    return symbols
+    return gears, numbers
 
 
+def get_gear_ratio(gear, numbers):
+    count = 0
+    ratio = 1
+    relevant_numbers = []
+    for y in range(gear["y"] - 1, gear["y"] + 2):
+        if y in numbers.keys():
+            relevant_numbers += numbers[y]
+    for nr in relevant_numbers:
+        for x in range(gear["x"] - 1, gear["x"] + 2):
+            if x in nr["x"]:
+                ratio *= nr["number"]
+                count += 1
+                break
+    if count == 2:
+        return ratio
+    return 0
 
 
 def solve(file_path):
-    parts_schema, numbers = get_schema(file_path)
+    gears, numbers = get_schema(file_path)
+    rations = 0
+    for g in gears:
+        rations += get_gear_ratio(g, numbers)
+    return rations
 
+
+if __name__ == "__main__":
+    input_file = os.path.dirname(__file__) + "/input_day03.txt"
+    print(solve(input_file))
