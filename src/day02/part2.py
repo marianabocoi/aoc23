@@ -1,5 +1,5 @@
-import os
 import math
+import os
 
 
 def get_cube_number(s):

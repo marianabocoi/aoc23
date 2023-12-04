@@ -1,4 +1,5 @@
 import os
+
 import day02.part2 as d02p2
 
 
@@ -10,7 +11,6 @@ def test_2():
     assert d02p2.get_max_draws_from_game(
         " 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
     ) == {"blue": 6, "red": 4, "green": 2}
-
 
 
 def test_0():

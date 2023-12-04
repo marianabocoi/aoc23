@@ -42,6 +42,11 @@ pytest tests/
 poetry add fastapi
 ```
 
+dev
+```
+poetry add --group=dev pre-commit
+```
+
 ## Troubleshooting
 ### Poetry install issues
 Update dependencies in the poetry.lock file with:
@@ -66,3 +71,21 @@ unset PROMPT_COMMAND
 
 ### Pytest
 Test files should start with test or it will not be automatically picked up
+
+
+## Pre commit
+
+Use [pre-commit](https://pre-commit.com/) utility.
+
+### Setup
+
+Install [pre-commit](https://pre-commit.com/) and configure the hook:
+```
+poetry add
+poetry shell
+pre-commit install --hook-type commit-msg
+```
+### Run manually
+```
+pre-commit run -a
+```

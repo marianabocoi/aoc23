@@ -1,4 +1,5 @@
 import os
+
 import day02.part1 as d02p1
 
 
@@ -17,25 +18,25 @@ def test_3():
         d02p1.matches_constraint(
             {"blue": 6, "red": 4, "green": 2}, {"blue": 6, "red": 4, "green": 2}
         )
-        == True
+        is True
     )
     assert (
         d02p1.matches_constraint(
             {"blue": 1, "red": 1, "green": 1}, {"blue": 6, "red": 4, "green": 2}
         )
-        == True
+        is True
     )
     assert (
         d02p1.matches_constraint(
             {"blue": 10, "red": 4, "green": 2}, {"blue": 6, "red": 4, "green": 2}
         )
-        == False
+        is False
     )
     assert (
         d02p1.matches_constraint(
             {"blue": 6, "red": 20, "green": 2}, {"blue": 6, "red": 4, "green": 2}
         )
-        == False
+        is False
     )
 
 
