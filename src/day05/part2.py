@@ -1,10 +1,12 @@
 import os
 
+
 def expand_seeds_ranges(seeds_ranges):
     seeds = []
-    for i in range(0,len(seeds_ranges),2):
-        seeds += list(range(seeds_ranges[i],seeds_ranges[i]+seeds_ranges[i+1]))
+    for i in range(0, len(seeds_ranges), 2):
+        seeds += range(seeds_ranges[i], seeds_ranges[i] + seeds_ranges[i + 1])
     return seeds
+
 
 def get_mapping(file_path):
     seeds = []
@@ -67,10 +69,10 @@ def convert_list_recursive(file_path):
     path = find_path(start, end, destinations)
     values = seeds
     hop_over = start
-    # print("init> ",start, hop_over, end, values)
+    print("init> ", start, hop_over, end, values)
     while hop_over != end:
         values = convert_list(values, hop_over, path[hop_over], mapping)
-        #    print("step> ",hop_over, path[hop_over], end, values)
+        print("step> ", hop_over, path[hop_over], end, values)
         hop_over = path[hop_over]
     return values
 

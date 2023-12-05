@@ -7,7 +7,36 @@ seeds, mapping, destinations = d05p2.get_mapping(test_input_file)
 
 
 def test_1():
-    assert seeds.sort() == [79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65].sort()
+    assert (
+        seeds.sort()
+        == [
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+        ].sort()
+    )
     assert mapping == {
         "seed": {
             "soil": [
@@ -237,8 +266,38 @@ def test_3():
         "seed": "soil",
     }
 
+
 def test_4():
-    assert d05p2.convert_list_recursive(test_input_file) == [82, 83, 84, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 60, 86, 87, 88, 89, 94, 95, 96, 56, 57, 58, 59, 97, 98]
+    assert d05p2.convert_list_recursive(test_input_file) == [
+        82,
+        83,
+        84,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        60,
+        86,
+        87,
+        88,
+        89,
+        94,
+        95,
+        96,
+        56,
+        57,
+        58,
+        59,
+        97,
+        98,
+    ]
+
 
 def test_0():
     assert d05p2.solve(test_input_file) == 46
