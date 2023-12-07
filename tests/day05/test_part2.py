@@ -7,52 +7,19 @@ seeds, mapping, destinations = d05p2.get_mapping(test_input_file)
 
 
 def test_1():
-    assert (
-        seeds.sort()
-        == [
-            79,
-            80,
-            81,
-            82,
-            83,
-            84,
-            85,
-            86,
-            87,
-            88,
-            89,
-            90,
-            91,
-            92,
-            55,
-            56,
-            57,
-            58,
-            59,
-            60,
-            61,
-            62,
-            63,
-            64,
-            65,
-        ].sort()
-    )
+
     assert mapping == {
         "seed": {
             "soil": [
                 {
                     "source_start": 98,
                     "source_end": 99,
-                    "destination_start": 50,
-                    "destination_end": 51,
                     "conversion": -48,
                     "length": 2,
                 },
                 {
                     "source_start": 50,
                     "source_end": 97,
-                    "destination_start": 52,
-                    "destination_end": 99,
                     "conversion": 2,
                     "length": 48,
                 },
@@ -63,16 +30,12 @@ def test_1():
                 {
                     "source_start": 15,
                     "source_end": 51,
-                    "destination_start": 0,
-                    "destination_end": 36,
                     "conversion": -15,
                     "length": 37,
                 },
                 {
                     "source_start": 52,
                     "source_end": 53,
-                    "destination_start": 37,
-                    "destination_end": 38,
                     "conversion": -15,
                     "length": 2,
                 },
@@ -297,6 +260,9 @@ def test_4():
         97,
         98,
     ]
+
+test_5():
+    a = Range(14,5)
 
 
 def test_0():

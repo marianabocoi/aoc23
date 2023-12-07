@@ -1,12 +1,26 @@
 import os
 
+class Range:
+  def __init__(self, start, length):
+    self.start = start
+    self.length = length
+    self.end = start+length-1
 
-def expand_seeds_ranges(seeds_ranges):
-    seeds = []
-    for i in range(0, len(seeds_ranges), 2):
-        seeds += range(seeds_ranges[i], seeds_ranges[i] + seeds_ranges[i + 1])
-    return seeds
+  def contains_point(self,x):
+    return x>=self.start and x<=self.end
 
+  def cut(self,x):
+    if self.contains_point(x):
+      return [Range(self.start,x-1), Range(x,self.end)]
+    return self
+  def __eq__(self, other):
+    return self.start == other.start and self.length == other.length
+
+  def __ne__(self, other):
+    return not self.__eq__(other)
+
+  def __str__(self):
+    return f"[{self.start}->{self.end}]"
 
 def get_mapping(file_path):
     seeds = []
@@ -16,8 +30,7 @@ def get_mapping(file_path):
     destination = ""
     with open(file_path) as input_file:
         seeds_str = input_file.readline().strip().split(":")[1].split()
-        seeds_ranges = [int(x) for x in seeds_str]
-        seeds = expand_seeds_ranges(seeds_ranges)
+        seeds = [int(x) for x in seeds_str]
         for line in input_file:
             if "-to-" in line:
                 transformation = line.strip().split()[0]
@@ -69,10 +82,10 @@ def convert_list_recursive(file_path):
     path = find_path(start, end, destinations)
     values = seeds
     hop_over = start
-    print("init> ", start, hop_over, end, values)
+    # print("init> ",start, hop_over, end, values)
     while hop_over != end:
         values = convert_list(values, hop_over, path[hop_over], mapping)
-        print("step> ", hop_over, path[hop_over], end, values)
+        #    print("step> ",hop_over, path[hop_over], end, values)
         hop_over = path[hop_over]
     return values
 
